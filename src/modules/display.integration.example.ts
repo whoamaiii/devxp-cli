@@ -129,8 +129,8 @@ export class GameUI {
         this.player.achievements.push(achievementId);
         
         const rarity = milestone >= 500 ? 'legendary' : 
-                       milestone >= 100 ? 'epic' : 
-                       milestone >= 50 ? 'rare' : 'common';
+          milestone >= 100 ? 'epic' : 
+            milestone >= 50 ? 'rare' : 'common';
         
         achievementNotification.displayUnlock({
           name: `${milestone} Commits`,

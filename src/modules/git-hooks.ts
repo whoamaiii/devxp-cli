@@ -767,7 +767,7 @@ ${newHookContent}
   } = {}): Promise<{ commits: CommitAnalysis[]; totalXP: number }> {
     const { since, until, author, maxCommits = 100 } = options;
 
-    let gitLogCmd = `git log --pretty=format:"%H" --no-merges`;
+    let gitLogCmd = 'git log --pretty=format:"%H" --no-merges';
     
     if (since) {
       gitLogCmd += ` --since="${since}"`;
@@ -915,21 +915,21 @@ ${newHookContent}
       current.xpReward > best.xpReward ? current : best
     , commits[0]);
 
-    let report = `📊 Git Activity XP Report\n`;
+    let report = '📊 Git Activity XP Report\n';
     report += `${'='.repeat(50)}\n\n`;
     report += `📅 Period: Last ${days} days\n`;
     if (author) {
       report += `👤 Author: ${author}\n`;
     }
-    report += `\n`;
-    report += `📈 Summary:\n`;
+    report += '\n';
+    report += '📈 Summary:\n';
     report += `  • Total Commits: ${commits.length}\n`;
     report += `  • Total XP Earned: ${totalXP}\n`;
     report += `  • Average XP per Commit: ${avgXP}\n`;
-    report += `\n`;
+    report += '\n';
     
     if (bestCommit) {
-      report += `🏆 Best Commit:\n`;
+      report += '🏆 Best Commit:\n';
       report += `  • Hash: ${bestCommit.hash.substring(0, 7)}\n`;
       report += `  • Message: ${bestCommit.message.split('\n')[0]}\n`;
       report += `  • XP Earned: ${bestCommit.xpReward}\n`;

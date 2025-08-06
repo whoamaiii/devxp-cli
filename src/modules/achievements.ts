@@ -347,7 +347,7 @@ defineAchievement(
   'Code between 2 AM and 5 AM.',
   AchievementCategory.HIDDEN,
   1,
-  (ctx) => {
+  (_ctx) => {
     const hour = new Date().getHours();
     return hour >= 2 && hour < 5;
   },
@@ -360,7 +360,7 @@ defineAchievement(
   'Start coding before 6 AM.',
   AchievementCategory.HIDDEN,
   1,
-  (ctx) => {
+  (_ctx) => {
     const hour = new Date().getHours();
     return hour < 6;
   },

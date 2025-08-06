@@ -121,7 +121,7 @@ shellIntegrationCommand
       if (isInstalled) {
         console.log(chalk.green('✅ Installed'));
         console.log(chalk.white(`📁 Config directory: ${process.env['HOME']}/.config/devxp/`));
-        console.log(chalk.white(`📄 Integration file: shell-integration.zsh`));
+        console.log(chalk.white('📄 Integration file: shell-integration.zsh'));
         
         // Test if it works
         const testResult = await shellIntegration.test();
@@ -238,34 +238,34 @@ shellIntegrationCommand
   .action(async (mode) => {
     try {
       switch (mode?.toLowerCase()) {
-        case 'on':
-          shellIntegration.enablePrivacyMode();
-          console.log(chalk.green('🔒 Privacy mode enabled'));
-          console.log(chalk.yellow('Commands will not be tracked while privacy mode is active'));
-          break;
+      case 'on':
+        shellIntegration.enablePrivacyMode();
+        console.log(chalk.green('🔒 Privacy mode enabled'));
+        console.log(chalk.yellow('Commands will not be tracked while privacy mode is active'));
+        break;
           
-        case 'off':
-          shellIntegration.disablePrivacyMode();
-          console.log(chalk.green('🔓 Privacy mode disabled'));
-          console.log(chalk.cyan('Command tracking resumed'));
-          break;
+      case 'off':
+        shellIntegration.disablePrivacyMode();
+        console.log(chalk.green('🔓 Privacy mode disabled'));
+        console.log(chalk.cyan('Command tracking resumed'));
+        break;
           
-        case 'status':
-        case undefined:
-          const isPrivacy = shellIntegration.isPrivacyMode();
-          if (isPrivacy) {
-            console.log(chalk.yellow('🔒 Privacy mode is ON'));
-            console.log(chalk.gray('Commands are not being tracked'));
-          } else {
-            console.log(chalk.green('🔓 Privacy mode is OFF'));
-            console.log(chalk.gray('Commands are being tracked normally'));
-          }
-          break;
+      case 'status':
+      case undefined:
+        const isPrivacy = shellIntegration.isPrivacyMode();
+        if (isPrivacy) {
+          console.log(chalk.yellow('🔒 Privacy mode is ON'));
+          console.log(chalk.gray('Commands are not being tracked'));
+        } else {
+          console.log(chalk.green('🔓 Privacy mode is OFF'));
+          console.log(chalk.gray('Commands are being tracked normally'));
+        }
+        break;
           
-        default:
-          console.error(chalk.red(`Invalid mode: ${mode}`));
-          console.log(chalk.cyan('Use: on, off, or status'));
-          process.exit(1);
+      default:
+        console.error(chalk.red(`Invalid mode: ${mode}`));
+        console.log(chalk.cyan('Use: on, off, or status'));
+        process.exit(1);
       }
       
     } catch (error) {

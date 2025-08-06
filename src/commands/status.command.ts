@@ -1,10 +1,10 @@
 /**
  * Status command - Show current level, XP, and recent activity
  */
-import type { Command } from '../types/command.js';
-import { database } from '../modules/database.js';
-import { xpSystem } from '../modules/xp-system.js';
-import { achievementManager } from '../modules/achievements.js';
+import type { Command } from '../types/command';
+import { database } from '../modules/database';
+import { xpSystem } from '../modules/xp-system';
+import { achievementManager } from '../modules/achievements';
 import chalk from 'chalk';
 import ora from 'ora';
 
@@ -196,7 +196,7 @@ Options:
     }
   }
 
-  validate(args: ReadonlyArray<string>): boolean {
+  validate(_args: ReadonlyArray<string>): boolean {
     // All arguments are optional, so always valid
     return true;
   }

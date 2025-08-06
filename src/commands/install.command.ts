@@ -1,7 +1,7 @@
 /**
  * Install command - Set up git hooks and shell integration
  */
-import type { Command } from '../types/command.js';
+import type { Command } from '../types/command';
 import { promises as fs } from 'fs';
 import path from 'path';
 import os from 'os';
@@ -138,20 +138,20 @@ fi
       if (args.includes('--fish')) shell = 'fish';
 
       switch (shell) {
-        case 'zsh':
-          await this.installZshIntegration();
-          spinner.succeed('Zsh integration installed');
-          break;
-        case 'bash':
-          await this.installBashIntegration();
-          spinner.succeed('Bash integration installed');
-          break;
-        case 'fish':
-          await this.installFishIntegration();
-          spinner.succeed('Fish integration installed');
-          break;
-        default:
-          spinner.warn(`Unknown shell: ${shell}. Please install manually.`);
+      case 'zsh':
+        await this.installZshIntegration();
+        spinner.succeed('Zsh integration installed');
+        break;
+      case 'bash':
+        await this.installBashIntegration();
+        spinner.succeed('Bash integration installed');
+        break;
+      case 'fish':
+        await this.installFishIntegration();
+        spinner.succeed('Fish integration installed');
+        break;
+      default:
+        spinner.warn(`Unknown shell: ${shell}. Please install manually.`);
       }
     } catch (error) {
       spinner.fail('Failed to install shell integration');
@@ -306,7 +306,7 @@ end
     }
   }
 
-  validate(args: ReadonlyArray<string>): boolean {
+  validate(_args: ReadonlyArray<string>): boolean {
     // All arguments are optional
     return true;
   }

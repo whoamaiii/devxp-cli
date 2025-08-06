@@ -155,14 +155,14 @@ Options:
 
   private getRankDisplay(rank: number): string {
     switch (rank) {
-      case 1:
-        return chalk.yellow('🥇 1st');
-      case 2:
-        return chalk.gray('🥈 2nd');
-      case 3:
-        return chalk.rgb(205, 127, 50)('🥉 3rd');
-      default:
-        return chalk.white(`#${rank}`);
+    case 1:
+      return chalk.yellow('🥇 1st');
+    case 2:
+      return chalk.gray('🥈 2nd');
+    case 3:
+      return chalk.rgb(205, 127, 50)('🥉 3rd');
+    default:
+      return chalk.white(`#${rank}`);
     }
   }
 
@@ -209,15 +209,15 @@ Options:
 
   private formatPeriod(period: string): string {
     switch (period) {
-      case 'weekly':
-        return 'This Week';
-      case 'monthly':
-        return 'This Month';
-      case 'all':
-      case 'global':
-        return 'All Time';
-      default:
-        return period;
+    case 'weekly':
+      return 'This Week';
+    case 'monthly':
+      return 'This Month';
+    case 'all':
+    case 'global':
+      return 'All Time';
+    default:
+      return period;
     }
   }
 

@@ -43,25 +43,25 @@ Examples:
     const value = valueParts.join(' ');
 
     switch (action) {
-      case 'get':
-        await this.get(key);
-        break;
-      case 'set':
-        await this.set(key, value);
-        break;
-      case 'list':
-        await this.list();
-        break;
-      case 'reset':
-        await this.reset();
-        break;
-      case 'path':
-        console.log(chalk.green(`Config file path: ${configFile}`));
-        break;
-      default:
-        console.error(chalk.red(`Unknown action: ${action}`));
-        console.log(this.help);
-        break;
+    case 'get':
+      await this.get(key);
+      break;
+    case 'set':
+      await this.set(key, value);
+      break;
+    case 'list':
+      await this.list();
+      break;
+    case 'reset':
+      await this.reset();
+      break;
+    case 'path':
+      console.log(chalk.green(`Config file path: ${configFile}`));
+      break;
+    default:
+      console.error(chalk.red(`Unknown action: ${action}`));
+      console.log(this.help);
+      break;
     }
   }
 

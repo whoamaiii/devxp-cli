@@ -1,6 +1,5 @@
 // src/modules/events.ts
-import { logger } from '@/lib/logger';
-import { generateUUID } from '@/lib/uuid';
+import { randomUUID } from 'crypto';
 
 /**
  * Event types for XP-related actions
@@ -38,10 +37,7 @@ const activityLog: XPEventPayload[] = [];
 // The event emitter and hook management
 const listeners = new Map<XPEventType, Hook[]>();
 
-let notificationPermission: NotificationPermission | null = null;
 let soundEnabled = false;
-let soundUrl = '';
-let audioObj: HTMLAudioElement | null = null;
 
 //-----------------------------------------------------
 // Event Emitter for XP Activities
@@ -58,7 +54,7 @@ export function off<T = unknown>(type: XPEventType, handler: EventHandler<T>) {
 
 export async function emit<T = unknown>(type: XPEventType, data: T): Promise<void> {
   const payload: XPEventPayload = {
-    id: generateUUID(),
+    id: randomUUID(),
     type,
     data,
     timestamp: Date.now(),
@@ -66,7 +62,7 @@ export async function emit<T = unknown>(type: XPEventType, data: T): Promise<voi
 
   // Log the event
   activityLog.push(payload);
-  logger.info(`Event emitted: ${type}`, payload);
+  console.log(`📡 Event emitted: ${type}`);
 
   // Trigger desktop notification or sound if needed
   if (type === 'achievement:unlock') {
@@ -82,7 +78,7 @@ export async function emit<T = unknown>(type: XPEventType, data: T): Promise<voi
     try {
       await hooks[i].fn(data, payload);
     } catch (err) {
-      logger.error(`Event handler for ${type} threw`, err);
+      console.error(`Event handler for ${type} threw`, err);
     }
   }
   // Remove one-time (once) listeners after firing
@@ -98,21 +94,11 @@ export async function emit<T = unknown>(type: XPEventType, data: T): Promise<voi
 // Optional Desktop Notifications (Achievements)
 //-----------------------------------------------------
 function notifyAchievement(data: any) {
-  if (typeof window === 'undefined' || !('Notification' in window)) return;
-  if (notificationPermission === 'denied') return;
-  if (!notificationPermission || notificationPermission === 'default') {
-    Notification.requestPermission().then((perm) => {
-      notificationPermission = perm;
-      if (perm === 'granted') notifyAchievement(data);
-    });
-    return;
-  }
-  // Basic structure - customize as needed
+  // CLI notification - could use node-notifier or similar in the future
   const text = typeof data === 'object' && data?.name ? `Achievement unlocked: ${data.name}` : 'Achievement unlocked!';
-  new Notification(text, {
-    body: data?.description || undefined,
-    icon: '/icons/achievement.png',
-  });
+  const description = data?.description || '';
+  console.log(`\n🏆 ${text}`);
+  if (description) console.log(`   ${description}`);
 }
 
 //-----------------------------------------------------
@@ -120,22 +106,17 @@ function notifyAchievement(data: any) {
 //-----------------------------------------------------
 export function enableLevelUpSound(url: string) {
   soundEnabled = true;
-  soundUrl = url;
-  if (typeof window !== 'undefined' && url) {
-    audioObj = new Audio(url);
-    audioObj.preload = 'auto';
-  }
+  // In CLI, we could play system sounds using node packages
+  console.log(`🔊 Sound effects enabled: ${url}`);
 }
 
 export function disableLevelUpSound() {
   soundEnabled = false;
-  audioObj = null;
 }
 
 function playLevelUpSound() {
-  if (soundEnabled && audioObj) {
-    audioObj.currentTime = 0;
-    audioObj.play().catch((e) => logger.warn('Failed to play level-up sound', e));
+  if (soundEnabled) {
+    console.log('🎵 LEVEL UP! 🎆');
   }
 }
 
@@ -169,8 +150,8 @@ export async function replayEvents(options: ReplayOptions = {}): Promise<void> {
 //-----------------------------------------------------
 // Debug Helpers
 //-----------------------------------------------------
-if (process.env.NODE_ENV !== 'production') {
-  // @ts-ignore
-  window.__xp_activity_log = activityLog;
+if (process.env['NODE_ENV'] !== 'production') {
+  // @ts-expect-error - debug helper
+  global.__xp_activity_log = activityLog;
 }
 

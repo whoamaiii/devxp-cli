@@ -1,8 +1,8 @@
 /**
  * Stats command - Display detailed statistics and charts
  */
-import type { Command } from '../types/command.js';
-import { database } from '../modules/database.js';
+import type { Command } from '../types/command';
+import { database } from '../modules/database';
 import chalk from 'chalk';
 import ora from 'ora';
 
@@ -85,21 +85,21 @@ Options:
   private async getActivitiesForPeriod(userId: string, period: string): Promise<any[]> {
     let limit = 100;
     switch (period) {
-      case 'day':
-        limit = 50;
-        break;
-      case 'week':
-        limit = 200;
-        break;
-      case 'month':
-        limit = 500;
-        break;
-      case 'year':
-        limit = 2000;
-        break;
-      case 'all':
-        limit = undefined;
-        break;
+    case 'day':
+      limit = 50;
+      break;
+    case 'week':
+      limit = 200;
+      break;
+    case 'month':
+      limit = 500;
+      break;
+    case 'year':
+      limit = 2000;
+      break;
+    case 'all':
+      limit = undefined;
+      break;
     }
     return database.getUserActivities(userId, limit);
   }
@@ -234,7 +234,7 @@ Options:
     return chalk.green('█'.repeat(filled)) + chalk.gray('░'.repeat(empty));
   }
 
-  private calculateMilestones(user: any, activities: any[], xpHistory: any[]): string[] {
+  private calculateMilestones(user: any, activities: any[], _xpHistory: any[]): string[] {
     const milestones: string[] = [];
     
     // Check for level milestones

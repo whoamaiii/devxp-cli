@@ -393,7 +393,7 @@ export class XPSystem extends EventEmitter {
     breakdown.push({
       step: 'Total Multiplier',
       value: totalMultiplier,
-      description: `Combined multiplier effect`
+      description: 'Combined multiplier effect'
     });
     
     breakdown.push({
@@ -429,25 +429,25 @@ export class XPSystem extends EventEmitter {
     if (level > this.config.maxLevel) return Number.MAX_SAFE_INTEGER;
 
     switch (this.config.progressionType) {
-      case 'linear':
-        return this.config.baseXPRequirement * level;
+    case 'linear':
+      return this.config.baseXPRequirement * level;
       
-      case 'exponential':
-        // Exponential growth: XP = base * (1.5 ^ (level - 1))
-        return Math.round(this.config.baseXPRequirement * Math.pow(1.5, level - 1));
+    case 'exponential':
+      // Exponential growth: XP = base * (1.5 ^ (level - 1))
+      return Math.round(this.config.baseXPRequirement * Math.pow(1.5, level - 1));
       
-      case 'fibonacci':
-        return this.calculateFibonacciXP(level);
+    case 'fibonacci':
+      return this.calculateFibonacciXP(level);
       
-      case 'custom':
-        if (this.config.customProgressionFormula) {
-          return this.config.customProgressionFormula(level);
-        }
-        // Fallback to exponential
-        return Math.round(this.config.baseXPRequirement * Math.pow(1.5, level - 1));
+    case 'custom':
+      if (this.config.customProgressionFormula) {
+        return this.config.customProgressionFormula(level);
+      }
+      // Fallback to exponential
+      return Math.round(this.config.baseXPRequirement * Math.pow(1.5, level - 1));
       
-      default:
-        return this.config.baseXPRequirement * level;
+    default:
+      return this.config.baseXPRequirement * level;
     }
   }
 

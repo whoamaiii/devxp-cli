@@ -286,8 +286,8 @@ export class AchievementNotification {
         margin: 1,
         borderStyle: 'double',
         borderColor: achievement.rarity === 'legendary' ? 'yellow' : 
-                     achievement.rarity === 'epic' ? 'magenta' :
-                     achievement.rarity === 'rare' ? 'blue' : 'gray',
+          achievement.rarity === 'epic' ? 'magenta' :
+            achievement.rarity === 'rare' ? 'blue' : 'gray',
         align: 'center'
       }
     );
@@ -524,7 +524,7 @@ export class XPPopup {
     console.log(gradient.cristal.multiline(comboText));
     
     const comboBox = boxen(
-      chalk.bold.yellow(`🔥 COMBO! 🔥\n\n`) +
+      chalk.bold.yellow('🔥 COMBO! 🔥\n\n') +
       chalk.white(`Base XP: ${baseXP}\n`) +
       chalk.cyan(`Multiplier: x${multiplier}\n`) +
       chalk.bold.green(`Total: ${totalXP} XP!`),
