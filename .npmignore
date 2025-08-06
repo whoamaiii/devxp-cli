@@ -1,0 +1,74 @@
+# Source files (only publish compiled)
+src/
+*.ts
+!*.d.ts
+
+# Test files
+tests/
+e2e/
+*.test.ts
+*.spec.ts
+jest.config.js
+jest.setup.js
+playwright.config.ts
+coverage/
+.nyc_output/
+
+# Development files
+.github/
+.vscode/
+.idea/
+*.log
+*.swp
+.DS_Store
+node_modules/
+.env
+.env.local
+.env.*.local
+
+# Documentation source files
+docs/
+*.md
+!README.md
+!LICENSE
+!CHANGELOG.md
+
+# Configuration files
+.eslintrc*
+.prettierrc*
+.gitignore
+.npmignore
+tsconfig.json
+eslint.config.mjs
+
+# Build artifacts
+*.map
+*.tsbuildinfo
+
+# Shell scripts
+*.sh
+install.sh
+uninstall.sh
+setup_wizard.sh
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Temporary files
+tmp/
+temp/
+.cache/
+
+# IDE specific
+.idea/
+.vscode/
+*.sublime-*
+*.code-workspace
+
+# OS specific
+Thumbs.db
+.DS_Store
+*.swp
+*~
